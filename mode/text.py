@@ -1,3 +1,4 @@
-
 class TextResponse:
-    START = """HELLO"""
+    START: str
+    def __init__(self):
+        self.START = """HELLO"""
