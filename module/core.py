@@ -55,7 +55,7 @@ async def check_file(message: types.Message):
             print(response["md5"])
             response_report = await virustotal.file_report(resource=response['scan_id'])
             await message.answer(f"""scan `id{response['scan_id']}`
-                                  search vulnerabilities  {response_report["positives"]}  is {response_report["total"]}""", parse_mode=types.ParseMode.MARKDOWN,
+                                  search vulnerabilities  {response_report['positives']}  is {response_report['positives']}""", parse_mode=types.ParseMode.MARKDOWN,
                                  reply_markup=button.link_buttons(link=[response["permalink"]],
                                                                   text=[message.document.file_name]))
             os.remove(f"file/{message.document.file_name}")
