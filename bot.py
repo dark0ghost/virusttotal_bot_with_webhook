@@ -2,11 +2,11 @@ import asyncio
 
 from aiohttp import web
 
-import mod.core
+import mode.core
 from server.server import hello, faviconico
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
+
     app = web.Application()
     app.add_routes([
         web.get('/', hello),
@@ -16,7 +16,6 @@ if __name__ == "__main__":
         web.get('/favicon.ico', faviconico),
         web.post('/favicon.ico', faviconico)
     ])
-    Bot = mod.core.BotStart(loop)
-    #loop.run_until_complete(Bot.on_startup())
-   # Bot.add_app(app=app)
-    web.run_app(app, port=Bot.config.server["port"], host=Bot.config.server["host"])
+    app.on_startup.append(mode.core.on_startup)
+    app.add_routes([web.post(mode.core.config.webhook["path"], mode.core.execute)])
+    web.run_app(app, port=mode.core.config.server["port"], host=mode.core.config.server["host"])
