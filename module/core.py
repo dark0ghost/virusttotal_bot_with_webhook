@@ -57,4 +57,5 @@ async def check_file(message: types.Message):
                                                                   text=[message.reply_to_message.document.file_name]))
             os.remove(f"file/{message.reply_to_message.document.file_name}")
     except Exception as e:
+        await message.reply(e)
         await message.answer("file not found")
