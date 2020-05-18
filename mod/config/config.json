@@ -1,11 +1,6 @@
 {
-  "token": {
-    "bot": "",
-    "virustotal": ""
-  },
-
   "webhook": {
-    "host": ""
+    "host": "https://virustotalbotaio.herokuapp.com/"
   },
   "server": {
     "host": "0.0.0.0",
