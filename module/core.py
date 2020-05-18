@@ -48,13 +48,13 @@ async def start(message: types.Message):
 async def check_file(message: types.Message):
     try:
         file_b = await bot.download_file_by_id(file_id=message.document.file_id)
-        async with aiofiles.open(f"file/{message.reply_to_message.document.file_name}", "wb") as file:
+        async with aiofiles.open(f"file/{message.document.file_name}", "wb") as file:
             await file.write(file_b.read())
-            response = await virustotal.file_scan(file=file, name_file=message.reply_to_message.document.file_name)
+            response = await virustotal.file_scan(file=file, name_file=message.document.file_name)
             await message.answer(f"scan ` id{response['scan_id']}`", parse_mode=types.ParseMode.MARKDOWN,
                                  reply_markup=button.link_buttons(link=[response["permalink"]],
-                                                                  text=[message.reply_to_message.document.file_name]))
-            os.remove(f"file/{message.reply_to_message.document.file_name}")
+                                                                  text=[message.document.file_name]))
+            os.remove(f"file/{message.document.file_name}")
     except Exception as e:
         await message.reply(message)
         await message.reply(e)
