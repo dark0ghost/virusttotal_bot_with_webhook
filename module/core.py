@@ -53,7 +53,7 @@ async def check_file(message: types.Message):
         async with aiofiles.open(f"file/{message.document.file_name}", "wb") as file:
             await file.write(file_b.read())
             response = await virustotal.file_scan(file=file, name_file=message.document.file_name)
-            await message.answer(f"""scan `id{response['scan_id']}`""",
+            await message.answer(f"""scan_id  - `{response['scan_id']}`""",
                                  parse_mode=types.ParseMode.MARKDOWN,
                                  reply_markup=button.link_buttons(link=[response["permalink"]],
                                                                   text=[message.document.file_name]))
@@ -69,6 +69,7 @@ async def check(message: types.Message):
     response = await virustotal.file_report(arg)
     print(response['response_code'] == -2)
     print(response)
-    if response['response_code'] == -2:
+    try:
+        await bot.send_message(chat_id=message.chat.id, text=f"{response['positives']} is {response['total']}")
+    except:
         await message.reply("wait or scan_id not waled")
-    await bot.send_message(chat_id=message.chat.id, text=f"{response['positives']} is {response['total']}")
