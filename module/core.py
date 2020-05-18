@@ -67,6 +67,8 @@ async def check(message: types.Message):
     arg = message.text
     print(arg)
     response = await virustotal.file_report(arg)
+    print(response['response_code'] == -2)
+    print(response)
     if response['response_code'] == -2:
         await message.reply("wait or scan_id not waled")
     await bot.send_message(chat_id=message.chat.id, text=f"{response['positives']} is {response['total']}")
