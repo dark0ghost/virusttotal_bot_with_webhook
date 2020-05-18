@@ -64,7 +64,8 @@ async def check_file(message: types.Message):
 
 @dp.message_handler(content_types=ContentTypes.TEXT)
 async def check(message: types.Message):
-    arg = await message.text
+    arg = message.text
+    print(arg)
     response = await virustotal.file_report(arg)
     if response['response_code'] == -2:
         await message.reply("wait or scan_id not waled")
