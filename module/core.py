@@ -40,7 +40,7 @@ async def execute(req: web.Request) -> web.Response:
 
 @dp.message_handler(commands=["start"])
 async def start(message: types.Message):
-    return await bot.send_message(message.chat.id, text=texts.START, parse_mode="markdown")
+    return await bot.send_message(message.chat.id, text=texts.START)
 
 
 @dp.message_handler(content_types=ContentTypes.DOCUMENT)
