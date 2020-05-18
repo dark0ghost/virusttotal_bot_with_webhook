@@ -56,7 +56,7 @@ async def check_file(message: types.Message):
             print(response["md5"])
             response_report = await virustotal.file_report(resource=response['scan_id'])
             await asyncio.sleep(5000)
-            while int(response_report["response_code"]) == -2:
+            while int(response_report["response_code"]) != 1:
                 await asyncio.sleep(5000)
                 response_report = await virustotal.file_report(resource=response['scan_id'])
             await message.answer(f"""scan `id{response['scan_id']}`
