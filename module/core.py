@@ -53,19 +53,15 @@ async def check_file(message: types.Message):
         async with aiofiles.open(f"file/{message.document.file_name}", "wb") as file:
             await file.write(file_b.read())
             response = await virustotal.file_scan(file=file, name_file=message.document.file_name)
-            print(response["md5"])
-            response_report = await virustotal.file_report(resource=response['scan_id'])
-            await message.reply("wait response - response['permalink']")
-            await asyncio.sleep(5000)
-            while int(response_report["response_code"]) != 1:
-                await asyncio.sleep(9000)
-                response_report = await virustotal.file_report(resource=response['scan_id'])
-            await message.answer(f"""scan `id{response['scan_id']}`
-                                  search vulnerabilities  {response_report['positives']}  is {response_report['total']}""",
+            await message.answer(f"""scan `id{response['scan_id']}`""",
                                  parse_mode=types.ParseMode.MARKDOWN,
                                  reply_markup=button.link_buttons(link=[response["permalink"]],
                                                                   text=[message.document.file_name]))
             os.remove(f"file/{message.document.file_name}")
     except Exception as e:
-        await message.reply(response_report)
         await message.reply(f"error: {e}")
+
+
+@dp.message_handler(commands=["check"], commands_prefix=["!"])
+async def check(message: types.Message):
+    await bot.send_message(await virustotal.file_report(message.get_args()))
