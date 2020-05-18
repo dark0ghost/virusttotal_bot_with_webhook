@@ -40,7 +40,7 @@ class Virustotal:
         """
         return self.is_public and self.limit == self.limit_max
 
-    async def new_session(self) -> aiohttp.ClientSession:
+    def new_session(self) -> aiohttp.ClientSession:
         """
         :return:
         """

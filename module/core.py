@@ -1,7 +1,7 @@
 import asyncio
 import logging
 import os
-from asyncio import get_event_loop
+import asyncio
 
 import aiofiles
 from aiogram import Bot, Dispatcher, types
@@ -13,7 +13,7 @@ from lib.virus_total import Virustotal
 from module import config_json, text, buttons
 
 logging.basicConfig(level=logging.INFO)
-loop = get_event_loop()
+loop = asyncio.get_event_loop()
 config = config_json.Config(loop)
 print(config.webook_url)
 bot = Bot(token=config.get_bot_token, parse_mode="html")
@@ -24,7 +24,7 @@ button = buttons.Button()
 
 
 async def on_startup(web_app: web.Application):
-    await virustotal.new_session()
+    virustotal.new_session()
     await bot.delete_webhook()
     await bot.set_webhook(config.get_webhook_url)
 

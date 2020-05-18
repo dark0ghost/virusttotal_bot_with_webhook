@@ -1,8 +1,7 @@
 from aiohttp import web
-from server.server import hello, faviconico
-from aiogram.dispatcher.webhook import get_new_configured_app
 
 import module.core
+from server.server import hello, faviconico
 
 if __name__ == "__main__":
     app: web.Application = web.Application()#get_new_configured_app(dispatcher=module.core.dp, path=module.core.config.webhook["path"])
