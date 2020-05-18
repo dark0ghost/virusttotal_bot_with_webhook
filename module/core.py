@@ -19,7 +19,8 @@ bot = Bot(token=config.get_bot_token)
 dp = Dispatcher(bot)
 virustotal = Virustotal(config.get_virus_total_token)
 texts = text.TextResponse()
-button =  buttons.Button()
+button = buttons.Button()
+
 
 async def on_startup(web_app: web.Application):
     await bot.delete_webhook()
@@ -57,4 +58,3 @@ async def check_file(message: types.Message):
             os.remove(f"file/{message.reply_to_message.document.file_name}")
     except Exception as e:
         await message.answer("file not found")
-
