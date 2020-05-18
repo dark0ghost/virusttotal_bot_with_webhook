@@ -62,6 +62,10 @@ async def check_file(message: types.Message):
         await message.reply(f"error: {e}")
 
 
-@dp.message_handler(commands=["check"], commands_prefix=["!"])
+@dp.message_handler(commands=["check"])
 async def check(message: types.Message):
-    await bot.send_message(await virustotal.file_report(message.get_args()))
+    arg = await message.get_args()
+    response = await virustotal.file_report(arg)
+    if response['response_code'] == -2:
+        await message.reply("wait")
+    await bot.send_message(chat_id=message.chat.id, text=f"{response['positives']} is {response['total']}")
