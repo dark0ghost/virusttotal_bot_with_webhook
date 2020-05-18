@@ -54,7 +54,7 @@ async def check_file(message: types.Message):
             await file.write(file_b.read())
             response = await virustotal.file_scan(file=file, name_file=message.document.file_name)
             await message.answer(f"scan_id  - {response['scan_id']}",
-                                 parse_mode=types.ParseMode.MARKDOWN,
+                                 parse_mode=types.ParseMode.HTML,
                                  reply_markup=button.link_buttons(link=[response["permalink"]],
                                                                   text=[message.document.file_name]))
             os.remove(f"file/{message.document.file_name}")
