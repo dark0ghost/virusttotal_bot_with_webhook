@@ -18,13 +18,12 @@ config = config_json.Config(loop)
 print(config.webook_url)
 bot = Bot(token=config.get_bot_token, parse_mode="html")
 dp = Dispatcher(bot)
-virustotal = Virustotal(config.get_virus_total_token)
+virustotal = Virustotal(config.get_virus_total_token, session=bot.session)
 texts = text.TextResponse()
 button = buttons.Button()
 
 
 async def on_startup(web_app: web.Application):
-    virustotal.new_session()
     await bot.delete_webhook()
     await bot.set_webhook(config.get_webhook_url)
 
