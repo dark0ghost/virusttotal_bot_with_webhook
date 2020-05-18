@@ -24,7 +24,7 @@ button = buttons.Button()
 
 async def on_startup(web_app: web.Application):
     await bot.delete_webhook()
-    await bot.set_webhook(config.get_webhook_config["host"])
+    await bot.set_webhook(config.get_webhook_url)
 
 
 async def execute(req: web.Request) -> web.Response:
