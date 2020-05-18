@@ -66,5 +66,6 @@ async def check_file(message: types.Message):
                                                                   text=[message.document.file_name]))
             os.remove(f"file/{message.document.file_name}")
     except Exception as e:
+        await message.reply(type(response_report["response_code"]))
         await message.reply(response_report)
         await message.reply(f"error: {e}")
