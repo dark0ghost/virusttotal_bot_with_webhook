@@ -20,7 +20,7 @@ class Config:
         self.virus_total_token: str = getenv("virustotal_token")
         self.webhook: Dict[str, Union[str, int]] = self.js["webhook"]
         self.server: Dict[str, Union[str, int]] = self.js["server"]
-        self.webook_url = f"{self.webhook}/{secrets.token_urlsafe()}"
+        self.webook_url = f"{self.webhook['host']}/{secrets.token_urlsafe()}"
 
     @property
     def get_bot_token(self) -> str:
@@ -38,7 +38,13 @@ class Config:
     def get_webhook_config(self) -> Dict[str, Union[str, int]] :
         return self.webhook
 
-    async def load_config(self):
+    @property
+    def get_webhook_url(self):
+        return self.webook_url
 
+    async def load_config(self):
         async with aiofiles.open(f"{getcwd()}/mod/config/config.json", "rb") as f:
             self.js = json.loads(await f.read())
+
+
+

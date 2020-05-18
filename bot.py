@@ -1,3 +1,5 @@
+from aiohttp import web
+
 import mod.core
 
 if __name__ == "__main__":
