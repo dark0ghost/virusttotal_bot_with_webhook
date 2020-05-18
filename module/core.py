@@ -14,7 +14,7 @@ from module import config_json, text, buttons
 logging.basicConfig(level=logging.INFO)
 loop = get_event_loop()
 config = config_json.Config(loop)
-
+print(config.webook_url,config.webhook["path"])
 bot = Bot(token=config.get_bot_token)
 dp = Dispatcher(bot)
 virustotal = Virustotal(config.get_virus_total_token)
