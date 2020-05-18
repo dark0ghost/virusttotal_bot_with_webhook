@@ -55,7 +55,7 @@ async def check_file(message: types.Message):
             response = await virustotal.file_scan(file=file, name_file=message.document.file_name)
             print(response["md5"])
             response_report = await virustotal.file_report(resource=response['scan_id'])
-            await asyncio.sleep(100)
+            await asyncio.sleep(5000)
             await message.answer(f"""scan `id{response['scan_id']}`
                                   search vulnerabilities  {response_report['positives']}  is {response_report['positives']}""",
                                  parse_mode=types.ParseMode.MARKDOWN,
