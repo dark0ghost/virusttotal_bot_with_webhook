@@ -1,11 +1,9 @@
 import asyncio
 import logging
 import os
-import asyncio
 
 import aiofiles
 from aiogram import Bot, Dispatcher, types
-from aiogram.dispatcher import filters
 from aiogram.types import ContentTypes
 from aiohttp import web
 
