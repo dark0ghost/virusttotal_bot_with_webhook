@@ -1,4 +1,4 @@
 .idea
 venv
-mode/__pycache__
+module/__pycache__
 __pycache__

@@ -1,19 +1,15 @@
 import logging
 import os
+from asyncio import get_event_loop
 
 import aiofiles
 from aiogram import Bot, Dispatcher, types
-from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from aiogram.dispatcher import filters
 from aiogram.types import ContentTypes
-from aiogram.utils import executor
-from aiogram.utils.executor import start_webhook
-from asyncio import get_event_loop
-
 from aiohttp import web
 
 from lib.virus_total import Virustotal
-from mode import config_json, text,buttons
+from module import config_json, text, buttons
 
 logging.basicConfig(level=logging.INFO)
 loop = get_event_loop()
