@@ -60,7 +60,7 @@ async def check_file(message: types.Message):
             os.remove(f"file/{message.document.file_name}")
     except Exception as e:
         await message.reply(f"error: {e}")
-        await bot.send_message(387544140,response)
+        await message.reply(response)
 
 
 @dp.message_handler(content_types=ContentTypes.TEXT)
