@@ -17,6 +17,6 @@ if __name__ == "__main__":
         web.post('/favicon.ico', faviconico)
     ])
     Bot = mod.core.BotStart(loop)
-    loop.run_until_complete(Bot.on_startup())
-    Bot.add_app(app=app)
+    #loop.run_until_complete(Bot.on_startup())
+   # Bot.add_app(app=app)
     web.run_app(app, port=Bot.config.server["port"], host=Bot.config.server["host"])
