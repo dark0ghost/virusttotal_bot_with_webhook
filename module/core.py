@@ -40,7 +40,7 @@ async def execute(req: web.Request) -> web.Response:
 
 @dp.message_handler(commands=["start"])
 async def start(message: types.Message):
-    return await bot.send_message(message.chat.id, text=texts.START)
+    return await bot.send_message(message.chat.id, text=texts.START, parse_mode="markdown")
 
 
 @dp.message_handler(content_types=ContentTypes.DOCUMENT)
@@ -63,6 +63,8 @@ async def check(message: types.Message):
     arg = message.text
     response = await virustotal.file_report(arg)
     try:
-        await bot.send_message(chat_id=message.chat.id, text=f"{response['positives']} is {response['total']}")
+        await bot.send_message(chat_id=message.chat.id,
+                               text=f"detected viruses {response['positives']} is {response['total']}",
+                               reply_markup=button.link_buttons(text=["link"], link=[response["permalink"]]))
     except:
         await message.reply("wait or scan_id not waled")
