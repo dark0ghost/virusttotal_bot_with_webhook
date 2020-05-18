@@ -14,7 +14,7 @@ from module import config_json, text, buttons
 logging.basicConfig(level=logging.INFO)
 loop = get_event_loop()
 config = config_json.Config(loop)
-print(config.webook_url,config.webhook["path"])
+print(config.webook_url)
 bot = Bot(token=config.get_bot_token)
 dp = Dispatcher(bot)
 virustotal = Virustotal(config.get_virus_total_token)
@@ -57,4 +57,5 @@ async def check_file(message: types.Message):
             os.remove(f"file/{message.reply_to_message.document.file_name}")
     except Exception as e:
         await message.reply(message)
+        await message.reply(e)
         await message.answer("file not found")
