@@ -6,7 +6,6 @@ import mode.core
 from server.server import hello, faviconico
 
 if __name__ == "__main__":
-
     app = web.Application()
     app.add_routes([
         web.get('/', hello),

@@ -21,7 +21,7 @@ class Config:
         self.webhook: Dict[str, Union[str, int]] = self.js["webhook"]
         self.server: Dict[str, Union[str, int]] = self.js["server"]
         path = secrets.token_urlsafe()
-        self.webook_url = f"{self.webhook['host']}/{path}"
+        self.webook_url = f"{self.webhook['host']}{path}"
         self.webhook["path"] = f"/{path}"
 
 

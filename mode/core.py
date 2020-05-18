@@ -6,6 +6,7 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from aiogram.dispatcher import filters
 from aiogram.types import ContentTypes
+from aiogram.utils import executor
 from aiogram.utils.executor import start_webhook
 from asyncio import get_event_loop
 
@@ -25,6 +26,7 @@ texts = text.TextResponse()
 button =  buttons.Button()
 
 async def on_startup(web_app: web.Application):
+    await bot.delete_webhook()
     await bot.set_webhook(config.get_webhook_config["host"])
 
 
@@ -59,3 +61,4 @@ async def check_file(message: types.Message):
             os.remove(f"file/{message.reply_to_message.document.file_name}")
     except Exception as e:
         await message.answer("file not found")
+
