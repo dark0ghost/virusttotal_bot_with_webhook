@@ -16,8 +16,8 @@ logging.basicConfig(level=logging.INFO)
 loop = get_event_loop()
 config = config_json.Config(loop)
 
-bot = Bot(token=config.get_bot_token)
-dp = Dispatcher(bot)
+#bot = Bot(token=config.get_bot_token)
+#dp = Dispatcher(bot)
 
 
 async def on_startup(web_app: web.Application):
