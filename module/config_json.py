@@ -47,7 +47,7 @@ class Config:
         return self.webook_url
 
     async def load_config(self):
-        async with aiofiles.open(f"{getcwd()}/mode/config/config.json", "rb") as f:
+        async with aiofiles.open(f"{getcwd()}/module/config/config.json", "rb") as f:
             self.js = json.loads(await f.read())
 
 
