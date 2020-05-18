@@ -22,7 +22,7 @@ class BotStart:
         self.dp.middleware.setup(LoggingMiddleware())
 
     def add_app(self, app: web.Application):
-        app.on_startup.append(self.on_startup)
+      #  app.on_startup.append(self.on_startup)
         app.add_routes([web.post(self.config.webhook["path"], self.execute)])
 
     async def on_startup(self):
