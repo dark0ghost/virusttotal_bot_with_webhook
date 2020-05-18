@@ -3,7 +3,7 @@ import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from aiogram.utils.executor import start_webhook
-from asyncio import get_event_loop
+from asyncio import AbstractEventLoop
 
 from aiohttp import web
 
@@ -13,8 +13,8 @@ from mod.handler import massage
 
 
 class BotStart:
-    def __init__(self):
-        self.loop = get_event_loop()
+    def __init__(self,loop: AbstractEventLoop):
+        self.loop = loop
         self.config = config_json.Config(loop=self.loop)
         self.bot = Bot(self.config.get_bot_token)
         self.dp = Dispatcher(self.bot)
