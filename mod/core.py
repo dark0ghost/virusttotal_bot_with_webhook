@@ -4,7 +4,10 @@ from aiogram import Bot, Dispatcher
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
 from aiogram.utils.executor import start_webhook
 from asyncio import get_event_loop
+
+from lib.virus_total import Virustotal
 from mod import config_json
+from mod.handler import massage
 
 
 class BotStart:
@@ -15,6 +18,7 @@ class BotStart:
         self.dp = Dispatcher(self.bot)
         logging.basicConfig(level=logging.INFO)
         self.dp.middleware.setup(LoggingMiddleware())
+        massage.rigester_handler(self.dp, self.bot, Virustotal(self.config.virus_total_token))
 
     def start(self, *args, **kwargs):
         start_webhook(
