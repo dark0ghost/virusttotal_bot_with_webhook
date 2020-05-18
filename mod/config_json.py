@@ -20,7 +20,10 @@ class Config:
         self.virus_total_token: str = getenv("virustotal_token")
         self.webhook: Dict[str, Union[str, int]] = self.js["webhook"]
         self.server: Dict[str, Union[str, int]] = self.js["server"]
-        self.webook_url = f"{self.webhook['host']}/{secrets.token_urlsafe()}"
+        path = secrets.token_urlsafe()
+        self.webook_url = f"{self.webhook['host']}/{path}"
+        self.webhook["path"] = path
+
 
     @property
     def get_bot_token(self) -> str:
