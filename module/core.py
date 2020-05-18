@@ -41,7 +41,7 @@ async def execute(req: web.Request) -> web.Response:
         return web.Response()
 
 
-@dp.message_handler(filters.CommandStart)
+@dp.message_handler(commands=["start"])
 async def start(message: types.Message):
     return await bot.send_message(message.chat.id, text=texts.START)
 
