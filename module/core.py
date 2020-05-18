@@ -47,7 +47,6 @@ async def start(message: types.Message):
 @dp.message_handler(content_types=ContentTypes.DOCUMENT)
 async def check_file(message: types.Message):
     try:
-
         file_b = await bot.download_file_by_id(file_id=message.document.file_id)
         async with aiofiles.open(f"file/{message.reply_to_message.document.file_name}", "wb") as file:
             await file.write(file_b.read())
@@ -57,5 +56,5 @@ async def check_file(message: types.Message):
                                                                   text=[message.reply_to_message.document.file_name]))
             os.remove(f"file/{message.reply_to_message.document.file_name}")
     except Exception as e:
-        await message.reply(e)
+        await message.reply(e,message)
         await message.answer("file not found")
