@@ -16,7 +16,7 @@ logging.basicConfig(level=logging.INFO)
 loop = get_event_loop()
 config = config_json.Config(loop)
 print(config.webook_url)
-bot = Bot(token=config.get_bot_token)
+bot = Bot(token=config.get_bot_token, parse_mode="html")
 dp = Dispatcher(bot)
 virustotal = Virustotal(config.get_virus_total_token)
 texts = text.TextResponse()
@@ -53,7 +53,7 @@ async def check_file(message: types.Message):
         async with aiofiles.open(f"file/{message.document.file_name}", "wb") as file:
             await file.write(file_b.read())
             response = await virustotal.file_scan(file=file, name_file=message.document.file_name)
-            await message.answer(f"""scan_id  - `{response['scan_id']}`""",
+            await message.answer(f"""scan_id  - {response['scan_id']}""",
                                  parse_mode=types.ParseMode.MARKDOWN,
                                  reply_markup=button.link_buttons(link=[response["permalink"]],
                                                                   text=[message.document.file_name]))
