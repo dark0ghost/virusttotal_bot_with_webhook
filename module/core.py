@@ -64,7 +64,7 @@ async def check(message: types.Message):
     response = await virustotal.file_report(arg)
     try:
         await bot.send_message(chat_id=message.chat.id,
-                               text=f"detected viruses {response['positives']} is {response['total']}",
+                               text=f"{response['positives']} antiviruses out of {response['total']} detected a virus",
                                reply_markup=button.link_buttons(text=["link"], link=[response["permalink"]]))
     except:
         await message.reply("wait or scan_id not waled")
