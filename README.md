@@ -18,4 +18,5 @@ __application uses webhook__
 |aiohttp|3.6.2|
 |orjson|3.0.0|
 |aiofiles|0.5.0|
+
 **watch in more detail** [requirements.txt](https://github.com/dark0ghost/virusttotal_bot_with_webhook/blob/master/requirements.txt)
